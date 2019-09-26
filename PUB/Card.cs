@@ -8,17 +8,17 @@ namespace PUB
 {
     class Card
     {
-        private string id;
+        private string cardId;
         private double cardBalance;
-        public Card(string id, double cardBalance)
+        public Card(string cardId, double cardBalance)
         {
-            this.id = id;
+            this.cardId = cardId;
             this.cardBalance = cardBalance;
         }
-        public string Id
+        public string CardId
         {
-            get { return id; }
-            set { id = value; }
+            get { return cardId; }
+            set { cardId = value; }
 
         }
         public double CardBalance

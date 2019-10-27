@@ -14,6 +14,7 @@ namespace PUB
 {
     class Address : INotifyPropertyChanged
     {
+        int id;
         private string street;
         private int house;
         private int flat;

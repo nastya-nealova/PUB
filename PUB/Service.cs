@@ -9,7 +9,7 @@ namespace PUB
     class Service
     {
         private CreditCard credit_card;
-        //private Address address;
+        private Address address;
         private string service_name;
 
         public string ServiceName

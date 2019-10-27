@@ -4,66 +4,72 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// Have Interface INotifyProperty Cnahged
+using System.ComponentModel;
+// CallerMemberName
+using System.Runtime.CompilerServices;
+
 namespace PUB
 {
-    class Person
+    class Person : INotifyPropertyChanged
     {
-        private string name;
-        private string surname;
-
-        private bool CheckName(string InputName) {
-            //checking input name (validation name)
-            if (InputName != "")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        private bool CheckSurname(string InputSurname) {
-            // validation surname
-            if (InputSurname != "")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+        public Person(string name, string surname)
+        {
+            FirstName = name;
+            SecondName = surname;
         }
 
-        public string Name {
-            get {
-                return name;
-            }
-            set {
-                if (CheckName(value))
-                {
-                    name = value;
-                }
-            }
-        }
-        public string Surname
+        private string first_name;
+        private string second_name;
+
+        public string FirstName
         {
             get
             {
-                return name;
+                return first_name;
             }
             set
             {
-                if (CheckName(value))
+                if (CorrectInput(value))
                 {
-                    name = value;
+                    first_name = value;
+                    OnPropertyChanged("FirstName");
                 }
             }
         }
 
-        public Person(string name, string surname) {
-            Name = name;
-            Surname = surname;
+        public string SecondName
+        {
+            get
+            {
+                return second_name;
+            }
+            set
+            {
+                if (CorrectInput(value))
+                {
+                    second_name = value;
+                    OnPropertyChanged("SecondName");
+                }
+            }
         }
 
+        private bool CorrectInput(string input)
+        {
+            if (!String.IsNullOrEmpty(input))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
     }
 }
